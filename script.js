@@ -206,16 +206,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch('https://api.github.com/users/AmerAamir/repos?sort=updated');
       if (!response.ok) throw new Error('GitHub API request failed');
       const repos = await response.json();
-      // Define a list of custom images. Name your files sequentially
-      // (e.g. 1.png, 2.png, etc.) and the script will cycle through them.
-      const projectImages = [
-        'images/1.png',
-        'images/2.png',
-        'images/3.png',
-        'images/4.png',
-        'images/5.png',
-        'images/6.png'
-      ];
+      // Instead of relying on a fixed set of local images for
+      // automatically fetched repositories, use GitHub's built‑in
+      // Open Graph preview service to generate a unique image for
+      // each repository on the fly. GitHub exposes preview images
+      // through the opengraph.githubassets.com domain. The URL
+      // format is:
+      //   https://opengraph.githubassets.com/<hash>/<owner>/<repo>
+      // Where <hash> can be any random string. We generate a
+      // pseudo‑random hash here to bypass caching and always fetch
+      // a fresh preview. See Ema Suriano’s article for details【56339336363516†L40-L46】.
       repos.forEach((repo, index) => {
         const card = document.createElement('article');
         card.className = 'project-card';
@@ -236,9 +236,13 @@ document.addEventListener('DOMContentLoaded', () => {
         card.dataset.category = category;
         card.dataset.keywords = `${repo.name} ${repo.description || ''}`;
         card.tabIndex = 0;
-        // Cycle through the images array. If there are more repositories
-        // than images, the modulo operator reuses images from the start.
-        const imageSrc = projectImages[index % projectImages.length] || 'images/placeholder_light_gray_block.png';
+        // Generate the Open Graph preview image URL for this repo. A
+        // random hash is prepended to avoid browser caching; without
+        // it, GitHub may return a cached image even after a repo is
+        // updated. If the Open Graph service fails to return an
+        // image, the browser will simply not display one.
+        const randomHash = Math.random().toString(36).substring(2, 15);
+        const imageSrc = `https://opengraph.githubassets.com/${randomHash}/${repo.full_name}`;
         card.innerHTML = `
           <img src="${imageSrc}" alt="${repo.name}" loading="lazy">
           <div class="project-info">
