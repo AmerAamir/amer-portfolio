@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- SEO & Open Graph metadata -->
+  <title>Amer Hamza Aamir – ML/AI &amp; Full‑Stack Developer</title>
+  <meta name="description" content="Portfolio of Amer Hamza Aamir – a Master of Applied Computing student and ML/AI &amp; Full‑Stack Developer. Explore projects, skills, achievements and more.">
+  <meta property="og:title" content="Amer Hamza Aamir – ML/AI &amp; Full‑Stack Developer">
+  <meta property="og:description" content="Portfolio of Amer Hamza Aamir – a Master of Applied Computing student and ML/AI &amp; Full‑Stack Developer.">
+  <meta property="og:image" content="images/hero-background.png">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="images/ai-logo.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Skip link for accessibility -->
+  <a href="#main" class="skip-to-content">Skip to content</a>
+
+  <!-- Scroll progress bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="container">
+      <div class="brand">Amer&nbsp;Hamza&nbsp;Aamir</div>
+      <nav aria-label="Primary" id="nav">
+        <button id="nav-toggle" aria-label="Open navigation"><span></span></button>
+        <ul id="nav-list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#achievements">Achievements</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#resume">Résumé</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="controls">
+        <label for="color-picker" class="visually-hidden">Choose accent color</label>
+        <input type="color" id="color-picker" aria-label="Choose accent color">
+        <button id="theme-toggle" aria-label="Toggle dark mode"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content wrapper -->
+  <main id="main">
+    <!-- Hero Section -->
+    <section id="hero" aria-labelledby="hero-title">
+      <div class="hero-bg"></div>
+      <div class="hero-content container">
+        <h1 id="hero-title">Hi, I'm <span class="accent">Amer&nbsp;Hamza&nbsp;Aamir</span></h1>
+        <p class="hero-subtitle">I'm <span id="typewriter"></span></p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn primary">View Projects</a>
+          <a href="Amer_Hamza_Aamir_Resume.pdf" class="btn secondary" download>Download Résumé</a>
+        </div>
+        <!-- Animated stats counters -->
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-number" data-target="12">0</span>
+            <span class="stat-label">Projects completed</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" data-target="6">0</span>
+            <span class="stat-label">Years coding</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" data-target="15">0</span>
+            <span class="stat-label">Technologies mastered</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="container">
+        <h2 id="about-title">About Me</h2>
+        <p class="about-text">
+          I'm a Master of Applied Computing student at the University of Windsor (’26). I build practical, data‑driven software—from full‑stack web apps to ML systems and networked C/socket projects. With production experience as a Mendix specialist at S4 Digital, I focus on reliability, readable code and tests. I'm currently seeking a 4–8 month co‑op (starting September 2025) in ML/AI/Data/Software.
+        </p>
+        <div class="contact-row">
+          <a href="mailto:butt24@uwindsor.ca" class="contact-email">butt24@uwindsor.ca</a>
+          <button id="copy-email" class="copy-btn" aria-label="Copy email to clipboard">📋 Copy</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience & Education Section -->
+    <section id="experience" class="section" aria-labelledby="experience-title">
+      <div class="container">
+        <h2 id="experience-title">Experience &amp; Education</h2>
+        <div class="cards">
+          <!-- Education card -->
+          <article class="card" tabindex="0">
+            <h3>Master of Applied Computing</h3>
+            <p class="subheading">University of Windsor • 2024–2026</p>
+            <ul>
+              <li>Achieved ~80% average across graduate coursework.</li>
+              <li>Built practical, data‑driven software—from full‑stack web apps to ML systems and networking projects.</li>
+              <li>Focused on reliability, readable code and automated tests.</li>
+            </ul>
+          </article>
+          <!-- Professional card -->
+          <article class="card" tabindex="0">
+            <h3>Mendix Specialist</h3>
+            <p class="subheading">S4 Digital • 2023–2024</p>
+            <ul>
+              <li>Shipped production features and modules for enterprise clients.</li>
+              <li>Built data collection, tracking and reporting components.</li>
+              <li>Improved reliability under load and documented networking labs (TCP attacks, TLS).</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section" aria-labelledby="projects-title">
+      <div class="container">
+        <h2 id="projects-title">Projects</h2>
+        <div class="project-controls">
+          <div class="filters" role="group" aria-label="Project filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="ml">ML/AI</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="systems">Systems</button>
+            <button class="filter-btn" data-filter="low-code">Low‑Code</button>
+          </div>
+          <div class="search-box">
+            <input type="text" id="project-search" placeholder="Search projects…" aria-label="Search projects">
+          </div>
+        </div>
+        <div class="projects-grid" id="project-grid" tabindex="0" aria-label="Project list">
+          <!-- Manual project cards -->
+          <article class="project-card" data-category="systems" data-keywords="distributed file system c sockets dfs upload list tar untar delete" tabindex="0">
+            <img src="images/placeholder_light_gray_block.png" alt="Distributed File System" loading="lazy">
+            <div class="project-info">
+              <h3>Distributed File System</h3>
+              <p>Multi‑server S1–S4 DFS; forward/route by file type; upload/list/tar/untar/delete; fixed race conditions; synchronous replies; reliable file transfer.</p>
+              <a href="#" class="project-link" target="_blank" rel="noopener">Learn more</a>
+            </div>
+          </article>
+          <article class="project-card" data-category="web" data-keywords="eco footprint quiz django full stack bootstrap quiz" tabindex="0">
+            <img src="images/placeholder_light_gray_block.png" alt="Eco Footprint Quiz" loading="lazy">
+            <div class="project-info">
+              <h3>Eco Footprint Quiz</h3>
+              <p>Full‑stack quiz with results breakdown, Bootstrap UI and clean templates built with Django.</p>
+              <a href="#" class="project-link" target="_blank" rel="noopener">Learn more</a>
+            </div>
+          </article>
+          <article class="project-card" data-category="web" data-keywords="ecojobportal django auth dashboards job portal playwright tests" tabindex="0">
+            <img src="images/placeholder_light_gray_block.png" alt="EcoJobPortal" loading="lazy">
+            <div class="project-info">
+              <h3>EcoJobPortal</h3>
+              <p>Authentication, role dashboards and job postings portal built with Django and Playwright end‑to‑end tests.</p>
+              <a href="#" class="project-link" target="_blank" rel="noopener">Learn more</a>
+            </div>
+          </article>
+          <article class="project-card" data-category="low-code" data-keywords="s4 sight productivity tracker data models tracking logic reports" tabindex="0">
+            <img src="images/placeholder_light_gray_block.png" alt="S4 Sight – Productivity Tracker" loading="lazy">
+            <div class="project-info">
+              <h3>S4 Sight – Productivity Tracker</h3>
+              <p>Data models, tracking logic and reporting views built with Mendix for enterprise productivity.</p>
+              <a href="#" class="project-link" target="_blank" rel="noopener">Learn more</a>
+            </div>
+          </article>
+          <article class="project-card" data-category="web" data-keywords="remire global hiring portal integrations apis reliability" tabindex="0">
+            <img src="images/placeholder_light_gray_block.png" alt="Remire.co – Global Hiring Portal" loading="lazy">
+            <div class="project-info">
+              <h3>Remire.co – Global Hiring Portal</h3>
+              <p>Integrations, clean APIs and reliable performance under load for a global hiring platform.</p>
+              <a href="#" class="project-link" target="_blank" rel="noopener">Learn more</a>
+            </div>
+          </article>
+          <article class="project-card" data-category="low-code" data-keywords="proximus super app mendix wallet modules nba nbo personalization" tabindex="0">
+            <img src="images/placeholder_light_gray_block.png" alt="Proximus+ Super‑app" loading="lazy">
+            <div class="project-info">
+              <h3>Proximus+ Super‑app</h3>
+              <p>Wallet modules and NBA/NBO personalization cards with prioritization and date ordering built in Mendix.</p>
+              <a href="#" class="project-link" target="_blank" rel="noopener">Learn more</a>
+            </div>
+          </article>
+          <!-- GitHub repositories will be appended here by script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section" aria-labelledby="skills-title">
+      <div class="container">
+        <h2 id="skills-title">Skills</h2>
+        <div class="skills-grid">
+          <!-- Each skill bar includes data-level and a tooltip for context -->
+          <div class="skill" data-level="90" tabindex="0" title="Used extensively to build ML models, data pipelines and scripting utilities.">
+            <span class="skill-name">Python</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="85" tabindex="0" title="Developed full‑stack apps with Django ORM, templating and auth.">
+            <span class="skill-name">Django</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="75" tabindex="0" title="Built REST APIs and microservices using Flask.">
+            <span class="skill-name">Flask</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="70" tabindex="0" title="Developed low‑level network programs using C sockets.">
+            <span class="skill-name">C (Sockets)</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="80" tabindex="0" title="Built interactive UIs using JavaScript and React.">
+            <span class="skill-name">JavaScript &amp; React</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="75" tabindex="0" title="Designed schemas and queries for PostgreSQL/MySQL.">
+            <span class="skill-name">SQL (PostgreSQL/MySQL)</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="80" tabindex="0" title="Trained and deployed models using scikit‑learn and TensorFlow.">
+            <span class="skill-name">scikit‑learn &amp; TensorFlow</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="60" tabindex="0" title="Deployed applications on Azure and AWS cloud platforms.">
+            <span class="skill-name">Azure &amp; AWS</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="70" tabindex="0" title="Containerized applications using Docker and composed services.">
+            <span class="skill-name">Docker</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="90" tabindex="0" title="Version control for all projects with Git." >
+            <span class="skill-name">Git</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="65" tabindex="0" title="Automated end‑to‑end tests using Playwright.">
+            <span class="skill-name">Playwright</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="65" tabindex="0" title="Browser automation and UI tests with Selenium.">
+            <span class="skill-name">Selenium</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="75" tabindex="0" title="Delivered enterprise solutions with Mendix low‑code platform.">
+            <span class="skill-name">Mendix</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section" aria-labelledby="achievements-title">
+      <div class="container">
+        <h2 id="achievements-title">Achievements</h2>
+        <ul class="achievement-list">
+          <li>Master of Applied Computing with ~80% average.</li>
+          <li>Shipped production features at S4 Digital.</li>
+          <li>Completed AI/NLP bootcamps; hands‑on with MLFlow, Databricks and Microsoft Fabric.</li>
+          <li>Documented networking labs covering TCP attacks and TLS protocols.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Blog/Articles Section -->
+    <section id="blog" class="section" aria-labelledby="blog-title">
+      <div class="container">
+        <h2 id="blog-title">Blog/Articles</h2>
+        <div class="blog-list">
+          <article class="blog-post">
+            <h3>Optimizing Networked C Projects</h3>
+            <p>How I tackled race conditions and improved throughput in a multi‑threaded C socket project.</p>
+            <a href="https://www.linkedin.com/in/amer-aamir" target="_blank" rel="noopener">Read more on LinkedIn</a>
+          </article>
+          <article class="blog-post">
+            <h3>Building Robust APIs with Django</h3>
+            <p>Lessons learned while designing clean APIs and ensuring reliability under load.</p>
+            <a href="https://www.linkedin.com/in/amer-aamir" target="_blank" rel="noopener">Read more on LinkedIn</a>
+          </article>
+          <article class="blog-post">
+            <h3>End‑to‑End Testing with Playwright</h3>
+            <p>A deep dive into automating tests for complex user flows in web applications.</p>
+            <a href="https://www.linkedin.com/in/amer-aamir" target="_blank" rel="noopener">Read more on LinkedIn</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications Carousel -->
+    <section id="certifications" class="section" aria-labelledby="certifications-title">
+      <div class="container">
+        <h2 id="certifications-title">Certifications</h2>
+        <div class="carousel" aria-label="Certification logos">
+          <div class="carousel-track">
+            <div class="carousel-item"><img src="images/ai-logo.png" alt="AI/NLP Bootcamp" loading="lazy"></div>
+            <div class="carousel-item"><img src="images/cloud-logo.png" alt="Cloud Training" loading="lazy"></div>
+            <div class="carousel-item"><img src="images/degree-logo.png" alt="University Degree" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section" aria-labelledby="testimonials-title">
+      <div class="container">
+        <h2 id="testimonials-title">Testimonials</h2>
+        <div class="testimonials-slider" aria-label="Testimonials slider">
+          <div class="testimonial">“Amer consistently delivers maintainable, robust solutions.”<span class="cite">— Colleague at S4 Digital</span></div>
+          <div class="testimonial">“His knowledge of full‑stack tools and libraries is impressive.”<span class="cite">— Professor, University of Windsor</span></div>
+          <div class="testimonial">“A creative problem‑solver who embraces challenges with enthusiasm.”<span class="cite">— Peer Developer</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Résumé Section -->
+    <section id="resume" class="section" aria-labelledby="resume-title">
+      <div class="container">
+        <h2 id="resume-title">Résumé</h2>
+        <p>Below is a preview of my résumé. If you can’t view it inline, click the button to open it in a new tab.</p>
+        <div class="pdf-viewer">
+          <embed src="Amer_Hamza_Aamir_Resume.pdf" type="application/pdf" width="100%" height="480" aria-label="Résumé PDF"></embed>
+        </div>
+        <a href="Amer_Hamza_Aamir_Resume.pdf" class="btn secondary" target="_blank" rel="noopener">Open Résumé</a>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <div class="container">
+        <h2 id="contact-title">Contact</h2>
+        <p>Interested in working together or just want to say hello? Feel free to send me a message.</p>
+        <form id="contact-form" action="https://formspree.io/f/mayzvndy" method="POST">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn primary">Send Message</button>
+        </form>
+        <p class="form-note">Alternatively, you can <a href="mailto:butt24@uwindsor.ca">email me directly</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <p>© <span id="year"></span> Amer Hamza Aamir · Windsor, ON, Canada</p>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/amer-aamir" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6 1.11 6 0 4.88 0 3.5 0 2.12 1.11 1 2.48 1 3.86 1 4.98 2.12 4.98 3.5zM.4 23h4.16V7.98H.4V23zM7.69 7.98v15.02h4.15V15c0-2.1.04-4.78 2.92-4.78 2.92 0 3.37 2.28 3.37 4.63V23h4.15V14.4c0-4.15-.9-7.34-5.79-7.34-2.26 0-3.78 1.24-4.4 2.41h.06V7.98H7.69z" fill="currentColor"></path></svg>
+        </a>
+        <a href="https://github.com/AmerAamir" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.07-.02-2.1-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.1-.75.08-.74.08-.74 1.21.09 1.85 1.24 1.85 1.24 1.08 1.84 2.83 1.31 3.52 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.55.12-3.23 0 0 1.01-.32 3.3 1.23.96-.27 1.99-.41 3.02-.41s2.06.14 3.02.41c2.28-1.55 3.29-1.23 3.29-1.23.66 1.68.24 2.92.12 3.23.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.63-5.49 5.92.43.37.81 1.1.81 2.22 0 1.61-.01 2.91-.01 3.31 0 .32.21.69.82.58C20.56 21.79 24 17.29 24 12 24 5.37 18.63 0 12 0z" fill="currentColor"></path></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
