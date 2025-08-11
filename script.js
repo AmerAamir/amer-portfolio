@@ -334,8 +334,26 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Thank you! Your message has been sent.');
         contactForm.reset();
       } else {
-        alert('Oops! There was a problem sending your message.');
+        // If the Formspree request fails (e.g. endpoint not configured or
+        // network error), fall back to a mailto link so the visitor can
+        // send the message directly via their default mail client. This
+        // improves reliability without exposing the email address in a
+        // clickable link on the page.
+        const name = formData.get('name') || '';
+        const email = formData.get('email') || '';
+        const message = formData.get('message') || '';
+        const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+        const body = encodeURIComponent(`${message}\n\nFrom: ${name} (${email})`);
+        window.location.href = `mailto:butt24@uwindsor.ca?subject=${subject}&body=${body}`;
       }
-    }).catch(() => alert('Oops! There was a problem sending your message.'));
+    }).catch(() => {
+      // Same fallback in case of network error
+      const name = formData.get('name') || '';
+      const email = formData.get('email') || '';
+      const message = formData.get('message') || '';
+      const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+      const body = encodeURIComponent(`${message}\n\nFrom: ${name} (${email})`);
+      window.location.href = `mailto:butt24@uwindsor.ca?subject=${subject}&body=${body}`;
+    });
   });
 });
