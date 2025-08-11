@@ -2,6 +2,17 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   /* Utility functions */
+
+  // Always start at the top of the page on load. Without this,
+  // some browsers will restore the previous scroll position (e.g. when
+  // navigating back or after a hard refresh) which can make the page
+  // appear to load halfway down. Explicitly reset scroll restoration
+  // and scroll to the top to ensure the hero section is visible when
+  // the site loads.
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
   const qs = (selector, context = document) => context.querySelector(selector);
   const qsa = (selector, context = document) => [...context.querySelectorAll(selector)];
 
@@ -190,13 +201,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fetch GitHub repositories and append
   const fetchRepos = async () => {
     try {
-      const response = await fetch('https://api.github.com/users/AmerAamir/repos?sort=updated&per_page=6');
+      // Fetch all public repositories sorted by last update. Do not limit
+      // per_page so the portfolio can grow dynamically without code changes.
+      const response = await fetch('https://api.github.com/users/AmerAamir/repos?sort=updated');
       if (!response.ok) throw new Error('GitHub API request failed');
       const repos = await response.json();
-      repos.forEach(repo => {
+      // Define a list of custom images. Name your files sequentially
+      // (e.g. 1.png, 2.png, etc.) and the script will cycle through them.
+      const projectImages = [
+        'images/1.png',
+        'images/2.png',
+        'images/3.png',
+        'images/4.png',
+        'images/5.png',
+        'images/6.png'
+      ];
+      repos.forEach((repo, index) => {
         const card = document.createElement('article');
         card.className = 'project-card';
-        // categorize based on language
+        // Categorise based on primary language to enable filtering
         let category;
         switch (repo.language) {
           case 'Python':
@@ -213,17 +236,20 @@ document.addEventListener('DOMContentLoaded', () => {
         card.dataset.category = category;
         card.dataset.keywords = `${repo.name} ${repo.description || ''}`;
         card.tabIndex = 0;
+        // Cycle through the images array. If there are more repositories
+        // than images, the modulo operator reuses images from the start.
+        const imageSrc = projectImages[index % projectImages.length] || 'images/placeholder_light_gray_block.png';
         card.innerHTML = `
-          <img src="images/placeholder_light_gray_block.png" alt="${repo.name}" loading="lazy">
+          <img src="${imageSrc}" alt="${repo.name}" loading="lazy">
           <div class="project-info">
-            <h3>${repo.name}</h3>
+            <h3>${repo.name.replace(/-/g, ' ')}</h3>
             <p>${repo.description ? repo.description : 'No description provided.'}</p>
             <a href="${repo.html_url}" class="project-link" target="_blank" rel="noopener">View on GitHub</a>
           </div>
         `;
         projectGrid.appendChild(card);
       });
-      // update list of projectCards for filtering and navigation
+      // Update the list of project cards for filtering and keyboard navigation
       projectCards.splice(0, projectCards.length, ...qsa('.project-card'));
     } catch (err) {
       console.error('Error fetching repos:', err);
