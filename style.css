@@ -573,16 +573,18 @@ h2::after {
   display: flex;
   transition: transform 0.6s ease;
 }
-.testimonial {
-  flex: 0 0 100%;
-  max-width: 100%;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
-  margin: 0 0.5rem;
-}
+    .testimonial {
+      flex: 0 0 100%;
+      max-width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      /* Remove horizontal margin to ensure slide fits within container without
+         overflowing. Extra spacing can be handled via padding instead. */
+      margin: 0;
+    }
 .testimonial .quote {
   font-style: italic;
   margin-bottom: 1rem;
