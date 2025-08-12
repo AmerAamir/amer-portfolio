@@ -345,23 +345,35 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         projectGrid.appendChild(card);
       }
-      // Append manual external projects
+      // Append manual external projects. Use locally stored images for each project to
+      // ensure that thumbnails render correctly without relying on cross‑domain
+      // metadata. Should the `img` property be absent, fall back to the preview
+      // service.
       const externals = [
         {
           title: 'Remire.co',
           desc: 'Global hiring platform—contributed to core feature development and integrations.',
           url: 'https://remire.co/',
-          linkText: 'Learn More'
+          linkText: 'Learn More',
+          img: 'images/remire.png'
         },
         {
           title: 'Proximus+ (Belgium Telco)',
           desc: 'Wallet modules, NBA/NBO cards, personalization; worked within SAFe.',
           url: 'https://play.google.com/store/apps/details?id=be.belgacom.hello',
-          linkText: 'Learn More'
+          linkText: 'Learn More',
+          img: 'images/proximus.png'
         }
       ];
       for (const ext of externals) {
-        const imgSrc = await getPreviewImage(ext.url);
+        let imgSrc = ext.img;
+        if (!imgSrc) {
+          try {
+            imgSrc = await getPreviewImage(ext.url);
+          } catch {
+            imgSrc = '';
+          }
+        }
         const card = document.createElement('article');
         card.className = 'project-card';
         // Treat externals as web projects for filtering
@@ -398,6 +410,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.5 });
   qsa('.skill').forEach(skill => skillObserver.observe(skill));
+
+  // Testimonials slider: automatically cycles through testimonial items every 8 seconds.
+  const testimonialTrackElem = document.querySelector('.testimonial-track');
+  if (testimonialTrackElem) {
+    let testimonialIndex = 0;
+    setInterval(() => {
+      testimonialIndex = (testimonialIndex + 1) % testimonialTrackElem.children.length;
+      testimonialTrackElem.style.transform = `translateX(-${testimonialIndex * 100}%)`;
+    }, 8000);
+  }
 
   // Animated counters in hero
   const counters = qsa('.stat-number');
