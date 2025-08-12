@@ -418,10 +418,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // Testimonials slider: automatically cycles through testimonial items every 8 seconds.
   const testimonialTrackElem = document.querySelector('.testimonial-track');
   if (testimonialTrackElem) {
+    // Ensure the track is wide enough to contain all slides. Each slide will
+    // occupy 100% of the slider's visible width, so set the track width to
+    // number_of_items × 100%. Without this, some slides may be clipped because
+    // flex containers shrink by default.
+    const slideCount = testimonialTrackElem.children.length;
+    testimonialTrackElem.style.width = `${slideCount * 100}%`;
+
     let testimonialIndex = 0;
     setInterval(() => {
-      testimonialIndex = (testimonialIndex + 1) % testimonialTrackElem.children.length;
-      testimonialTrackElem.style.transform = `translateX(-${testimonialIndex * 100}%)`;
+      testimonialIndex = (testimonialIndex + 1) % slideCount;
+      testimonialTrackElem.style.transform = `translateX(-${testimonialIndex * (100 / slideCount)}%)`;
     }, 8000);
   }
 
