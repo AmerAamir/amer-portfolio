@@ -691,3 +691,40 @@ footer {
     font-size: 1.2rem;
   }
 }
+
+/*
+ * Testimonials grid layout
+ *
+ * Instead of a horizontally scrolling slider, display each testimonial
+ * as its own card in a responsive grid. The grid will automatically
+ * adjust the number of columns based on available space.
+ */
+.testimonials-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: 1rem;
+}
+.testimonial-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+.testimonial-card .quote {
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+.testimonial-card .author {
+  font-weight: bold;
+}
+.testimonial-card .title {
+  font-size: 0.9rem;
+  color: var(--muted-text);
+  margin-bottom: 0.5rem;
+}
+.testimonial-card a {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
