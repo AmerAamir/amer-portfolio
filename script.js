@@ -138,8 +138,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Project filtering and search
   const filterBtns = qsa('.filter-btn');
-  const projectCards = qsa('.project-card');
+  // projectCards will be populated after dynamic projects are rendered
   const projectGrid = qs('#project-grid');
+  let projectCards = [];
   const filterProjects = (filter) => {
     const searchTerm = qs('#project-search').value.toLowerCase().trim();
     projectCards.forEach(card => {
@@ -198,28 +199,115 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Fetch GitHub repositories and append
+  // Utility to fetch the README for a repository and return its Markdown text
+  async function getReadmeText(owner, repo) {
+    const branch = repo.default_branch || 'main';
+    const urls = [
+      `https://raw.githubusercontent.com/${owner}/${repo.name}/${branch}/README.md`,
+      `https://raw.githubusercontent.com/${owner}/${repo.name}/master/README.md`
+    ];
+    for (const u of urls) {
+      try {
+        const res = await fetch(u);
+        if (res.ok) return await res.text();
+      } catch (err) {
+        // ignore network errors and try next url
+      }
+    }
+    return '';
+  }
+
+  // Convert Markdown into a single descriptive sentence. Removes images, headings,
+  // HTML tags, comments, tables and condenses whitespace. Returns the first
+  // sentence longer than 20 characters, trimmed to ~140 chars.
+  function toOneLiner(md) {
+    const cleaned = md
+      .replace(/!\[[^\]]*\]\([^)]+\)/g, '') // images
+      .replace(/\[[^\]]+\]\(([^)]+)\)/g, '$1') // links → text
+      .replace(/^#.*$/gm, '') // headings
+      .replace(/<[^>]+>/g, '') // html tags
+      .replace(/<!--.*?-->/gs, '') // comments
+      .replace(/\|.*\|/g, '') // tables
+      .replace(/\s+/g, ' ') // whitespace
+      .trim();
+    const sentence = cleaned.split(/[.!?]\s/).find(s => s && s.length > 20);
+    if (!sentence) return null;
+    const s = sentence.trim();
+    return s.length > 140 ? s.slice(0, 137) + '…' : (/[.!?]$/.test(s) ? s : s + '.');
+  }
+
+  // Attempt to patch a repository description at the source using the GH_TOKEN
+  async function patchDescription(owner, repo, description) {
+    if (!description) return;
+    const token = (typeof GH_TOKEN !== 'undefined' ? GH_TOKEN : undefined);
+    // If no token available, skip patching; still provide description in UI
+    if (!token) return;
+    try {
+      await fetch(`https://api.github.com/repos/${owner}/${repo.name}`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github+json'
+        },
+        body: JSON.stringify({ description })
+      });
+      // Gentle rate limiting
+      await new Promise(r => setTimeout(r, 500));
+    } catch (err) {
+      // Silently ignore patch errors
+    }
+  }
+
+  // Fetch og:image or twitter:image for an external URL. Fallback to a screenshot
+  // via Microlink if meta tags are not present.
+  async function getPreviewImage(url) {
+    try {
+      // use jina.ai to fetch remote HTML via text extraction (proxy to bypass CORS)
+      const res = await fetch('https://r.jina.ai/http://' + url.replace(/^https?:\/\//, ''));
+      if (res.ok) {
+        const html = await res.text();
+        const ogMatch = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i);
+        const twitterMatch = html.match(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i);
+        const image = (ogMatch && ogMatch[1]) || (twitterMatch && twitterMatch[1]);
+        if (image) return image;
+      }
+    } catch (err) {
+      // ignore network errors; fallback below
+    }
+    return `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false`;
+  }
+
+  // Fetch GitHub repositories, derive descriptions and render cards alongside two manual externals
   const fetchRepos = async () => {
     try {
-      // Fetch all public repositories sorted by last update. Do not limit
-      // per_page so the portfolio can grow dynamically without code changes.
-      const response = await fetch('https://api.github.com/users/AmerAamir/repos?sort=updated');
+      const response = await fetch('https://api.github.com/users/AmerAamir/repos?per_page=100');
       if (!response.ok) throw new Error('GitHub API request failed');
-      const repos = await response.json();
-      // Instead of relying on a fixed set of local images for
-      // automatically fetched repositories, use GitHub's built‑in
-      // Open Graph preview service to generate a unique image for
-      // each repository on the fly. GitHub exposes preview images
-      // through the opengraph.githubassets.com domain. The URL
-      // format is:
-      //   https://opengraph.githubassets.com/<hash>/<owner>/<repo>
-      // Where <hash> can be any random string. We generate a
-      // pseudo‑random hash here to bypass caching and always fetch
-      // a fresh preview. See Ema Suriano’s article for details【56339336363516†L40-L46】.
-      repos.forEach((repo, index) => {
+      let repos = await response.json();
+      // filter out forks and archived repositories
+      repos = repos.filter(r => !r.fork && !r.archived);
+      // Determine total displayed count (GitHub repos + 2 manual externals)
+      const totalDisplayed = repos.length + 2;
+      // Update the projects completed counter target
+      const projectCounter = qs('.stat-number[data-target]');
+      if (projectCounter) {
+        projectCounter.dataset.target = totalDisplayed;
+        // If counters already started we also update the text immediately
+        if (countersStarted) {
+          projectCounter.textContent = totalDisplayed;
+        }
+      }
+      // Render GitHub repos sequentially to allow for awaiting description fetches
+      for (const repo of repos) {
+        let desc = repo.description;
+        if (!desc || !desc.trim()) {
+          const md = await getReadmeText('AmerAamir', repo);
+          desc = toOneLiner(md) || 'No description provided.';
+          // Attempt to patch the description at the source if a token is available
+          patchDescription('AmerAamir', repo, desc);
+        }
         const card = document.createElement('article');
         card.className = 'project-card';
-        // Categorise based on primary language to enable filtering
+        // Category based on language
         let category;
         switch (repo.language) {
           case 'Python':
@@ -230,31 +318,68 @@ document.addEventListener('DOMContentLoaded', () => {
           case 'C++':
             category = 'systems';
             break;
+          case 'JavaScript':
+          case 'TypeScript':
+          case 'HTML':
+          case 'CSS':
+          case 'Java':
+          case 'Kotlin':
+            category = 'web';
+            break;
           default:
             category = 'web';
         }
         card.dataset.category = category;
-        card.dataset.keywords = `${repo.name} ${repo.description || ''}`;
+        card.dataset.keywords = `${repo.name} ${desc}`;
         card.tabIndex = 0;
-        // Generate the Open Graph preview image URL for this repo. A
-        // random hash is prepended to avoid browser caching; without
-        // it, GitHub may return a cached image even after a repo is
-        // updated. If the Open Graph service fails to return an
-        // image, the browser will simply not display one.
+        // generate preview image
         const randomHash = Math.random().toString(36).substring(2, 15);
         const imageSrc = `https://opengraph.githubassets.com/${randomHash}/${repo.full_name}`;
         card.innerHTML = `
           <img src="${imageSrc}" alt="${repo.name}" loading="lazy">
           <div class="project-info">
             <h3>${repo.name.replace(/-/g, ' ')}</h3>
-            <p>${repo.description ? repo.description : 'No description provided.'}</p>
+            <p>${desc}</p>
             <a href="${repo.html_url}" class="project-link" target="_blank" rel="noopener">View on GitHub</a>
           </div>
         `;
         projectGrid.appendChild(card);
-      });
+      }
+      // Append manual external projects
+      const externals = [
+        {
+          title: 'Remire.co',
+          desc: 'Global hiring platform—contributed to core feature development and integrations.',
+          url: 'https://remire.co/',
+          linkText: 'Learn More'
+        },
+        {
+          title: 'Proximus+ (Belgium Telco)',
+          desc: 'Wallet modules, NBA/NBO cards, personalization; worked within SAFe.',
+          url: 'https://play.google.com/store/apps/details?id=be.belgacom.hello',
+          linkText: 'Learn More'
+        }
+      ];
+      for (const ext of externals) {
+        const imgSrc = await getPreviewImage(ext.url);
+        const card = document.createElement('article');
+        card.className = 'project-card';
+        // Treat externals as web projects for filtering
+        card.dataset.category = 'web';
+        card.dataset.keywords = `${ext.title} ${ext.desc}`;
+        card.tabIndex = 0;
+        card.innerHTML = `
+          <img src="${imgSrc}" alt="${ext.title}" loading="lazy">
+          <div class="project-info">
+            <h3>${ext.title}</h3>
+            <p>${ext.desc}</p>
+            <a href="${ext.url}" class="project-link" target="_blank" rel="noopener">${ext.linkText}</a>
+          </div>
+        `;
+        projectGrid.appendChild(card);
+      }
       // Update the list of project cards for filtering and keyboard navigation
-      projectCards.splice(0, projectCards.length, ...qsa('.project-card'));
+      projectCards = qsa('.project-card', projectGrid);
     } catch (err) {
       console.error('Error fetching repos:', err);
     }
@@ -306,17 +431,7 @@ document.addEventListener('DOMContentLoaded', () => {
     carouselTrack.innerHTML += carouselTrack.innerHTML; // duplicate to enable infinite scroll
   }
 
-  // Testimonials slider
-  const testimonials = qsa('.testimonial');
-  let testimonialIndex = 0;
-  const cycleTestimonials = () => {
-    testimonials.forEach((t, i) => {
-      t.classList.toggle('active', i === testimonialIndex);
-    });
-    testimonialIndex = (testimonialIndex + 1) % testimonials.length;
-  };
-  cycleTestimonials();
-  setInterval(cycleTestimonials, 5000);
+  // Testimonials are presented as static cards in the new design; no slider is required.
 
   // Formspree submission handling
   const contactForm = qs('#contact-form');

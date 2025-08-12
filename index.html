@@ -61,7 +61,9 @@
         <!-- Animated stats counters -->
         <div class="stats">
           <div class="stat">
-            <span class="stat-number" data-target="12">0</span>
+            <!-- The total number of projects is set dynamically in script.js once GitHub
+                 repositories are fetched. Set a placeholder target of 0 here. -->
+            <span class="stat-number" data-target="0">0</span>
             <span class="stat-label">Projects completed</span>
           </div>
           <div class="stat">
@@ -136,56 +138,9 @@
           </div>
         </div>
         <div class="projects-grid" id="project-grid" tabindex="0" aria-label="Project list">
-          <!-- Manual project cards -->
-          <article class="project-card" data-category="systems" data-keywords="distributed file system c sockets dfs upload list tar untar delete" tabindex="0">
-            <img src="images/placeholder_light_gray_block.png" alt="Distributed File System" loading="lazy">
-            <div class="project-info">
-              <h3>Distributed File System</h3>
-              <p>Multi‑server S1–S4 DFS; forward/route by file type; upload/list/tar/untar/delete; fixed race conditions; synchronous replies; reliable file transfer.</p>
-              <a href="#" class="project-link" target="_blank" rel="noopener">Learn more</a>
-            </div>
-          </article>
-          <article class="project-card" data-category="web" data-keywords="eco footprint quiz django full stack bootstrap quiz" tabindex="0">
-            <img src="images/placeholder_light_gray_block.png" alt="Eco Footprint Quiz" loading="lazy">
-            <div class="project-info">
-              <h3>Eco Footprint Quiz</h3>
-              <p>Full‑stack quiz with results breakdown, Bootstrap UI and clean templates built with Django.</p>
-              <a href="#" class="project-link" target="_blank" rel="noopener">Learn more</a>
-            </div>
-          </article>
-          <article class="project-card" data-category="web" data-keywords="ecojobportal django auth dashboards job portal playwright tests" tabindex="0">
-            <img src="images/placeholder_light_gray_block.png" alt="EcoJobPortal" loading="lazy">
-            <div class="project-info">
-              <h3>EcoJobPortal</h3>
-              <p>Authentication, role dashboards and job postings portal built with Django and Playwright end‑to‑end tests.</p>
-              <a href="#" class="project-link" target="_blank" rel="noopener">Learn more</a>
-            </div>
-          </article>
-          <article class="project-card" data-category="low-code" data-keywords="s4 sight productivity tracker data models tracking logic reports" tabindex="0">
-            <img src="images/placeholder_light_gray_block.png" alt="S4 Sight – Productivity Tracker" loading="lazy">
-            <div class="project-info">
-              <h3>S4 Sight – Productivity Tracker</h3>
-              <p>Data models, tracking logic and reporting views built with Mendix for enterprise productivity.</p>
-              <a href="#" class="project-link" target="_blank" rel="noopener">Learn more</a>
-            </div>
-          </article>
-          <article class="project-card" data-category="web" data-keywords="remire global hiring portal integrations apis reliability" tabindex="0">
-            <img src="images/placeholder_light_gray_block.png" alt="Remire.co – Global Hiring Portal" loading="lazy">
-            <div class="project-info">
-              <h3>Remire.co – Global Hiring Portal</h3>
-              <p>Integrations, clean APIs and reliable performance under load for a global hiring platform.</p>
-              <a href="#" class="project-link" target="_blank" rel="noopener">Learn more</a>
-            </div>
-          </article>
-          <article class="project-card" data-category="low-code" data-keywords="proximus super app mendix wallet modules nba nbo personalization" tabindex="0">
-            <img src="images/placeholder_light_gray_block.png" alt="Proximus+ Super‑app" loading="lazy">
-            <div class="project-info">
-              <h3>Proximus+ Super‑app</h3>
-              <p>Wallet modules and NBA/NBO personalization cards with prioritization and date ordering built in Mendix.</p>
-              <a href="#" class="project-link" target="_blank" rel="noopener">Learn more</a>
-            </div>
-          </article>
-          <!-- GitHub repositories will be appended here by script.js -->
+          <!-- All project cards are now generated dynamically via script.js. This grid will be populated
+               with GitHub repositories (filtered for forks/archived) and two manual external projects
+               (Remire.co and Proximus+). -->
         </div>
       </div>
     </section>
@@ -195,57 +150,161 @@
       <div class="container">
         <h2 id="skills-title">Skills</h2>
         <div class="skills-grid">
-          <!-- Each skill bar includes data-level and a tooltip for context -->
-          <div class="skill" data-level="90" tabindex="0" title="Used extensively to build ML models, data pipelines and scripting utilities.">
+          <!-- Expanded in‑demand skills across programming, web, data/ML, databases, DevOps, APIs/systems, cloud and security/networking. Each bar has a data-level and tooltip explaining practical experience. -->
+          <!-- Programming languages -->
+          <div class="skill" data-level="90" tabindex="0" title="Extensive scripting and application development.">
             <span class="skill-name">Python</span>
             <div class="bar"><span class="fill"></span></div>
           </div>
-          <div class="skill" data-level="85" tabindex="0" title="Developed full‑stack apps with Django ORM, templating and auth.">
+          <div class="skill" data-level="75" tabindex="0" title="OOP and backend services in strongly‑typed environments.">
+            <span class="skill-name">Java</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="85" tabindex="0" title="Interactive UIs with React and modern ES features.">
+            <span class="skill-name">JavaScript</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="70" tabindex="0" title="Strong typing for large‑scale web apps with React/Next.js.">
+            <span class="skill-name">TypeScript</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="65" tabindex="0" title="Systems programming and socket development.">
+            <span class="skill-name">C</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="60" tabindex="0" title="Low‑level programming and performance optimisation.">
+            <span class="skill-name">C++</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <!-- Web technologies -->
+          <div class="skill" data-level="90" tabindex="0" title="Semantically structured markup for accessible sites.">
+            <span class="skill-name">HTML</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="85" tabindex="0" title="Responsive layouts and theming with CSS variables and Flex/Grid.">
+            <span class="skill-name">CSS</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="80" tabindex="0" title="Single‑page applications using React and hooks.">
+            <span class="skill-name">React</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="65" tabindex="0" title="Server‑side rendering and API routes with Next.js.">
+            <span class="skill-name">Next.js</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="80" tabindex="0" title="Full‑stack development with Django ORM, templates and auth.">
             <span class="skill-name">Django</span>
             <div class="bar"><span class="fill"></span></div>
           </div>
-          <div class="skill" data-level="75" tabindex="0" title="Built REST APIs and microservices using Flask.">
-            <span class="skill-name">Flask</span>
+          <div class="skill" data-level="70" tabindex="0" title="REST APIs and microservices using Express.js.">
+            <span class="skill-name">Node.js/Express</span>
             <div class="bar"><span class="fill"></span></div>
           </div>
-          <div class="skill" data-level="70" tabindex="0" title="Developed low‑level network programs using C sockets.">
-            <span class="skill-name">C (Sockets)</span>
+          <!-- Data & ML -->
+          <div class="skill" data-level="85" tabindex="0" title="Data wrangling and analysis with Pandas.">
+            <span class="skill-name">Pandas</span>
             <div class="bar"><span class="fill"></span></div>
           </div>
-          <div class="skill" data-level="80" tabindex="0" title="Built interactive UIs using JavaScript and React.">
-            <span class="skill-name">JavaScript &amp; React</span>
+          <div class="skill" data-level="80" tabindex="0" title="Numerical computing and vectorised operations.">
+            <span class="skill-name">NumPy</span>
             <div class="bar"><span class="fill"></span></div>
           </div>
-          <div class="skill" data-level="75" tabindex="0" title="Designed schemas and queries for PostgreSQL/MySQL.">
-            <span class="skill-name">SQL (PostgreSQL/MySQL)</span>
+          <div class="skill" data-level="75" tabindex="0" title="Classical ML algorithms using scikit‑learn.">
+            <span class="skill-name">scikit‑learn</span>
             <div class="bar"><span class="fill"></span></div>
           </div>
-          <div class="skill" data-level="80" tabindex="0" title="Trained and deployed models using scikit‑learn and TensorFlow.">
-            <span class="skill-name">scikit‑learn &amp; TensorFlow</span>
+          <div class="skill" data-level="65" tabindex="0" title="Deep learning models with TensorFlow.">
+            <span class="skill-name">TensorFlow</span>
             <div class="bar"><span class="fill"></span></div>
           </div>
-          <div class="skill" data-level="60" tabindex="0" title="Deployed applications on Azure and AWS cloud platforms.">
-            <span class="skill-name">Azure &amp; AWS</span>
+          <div class="skill" data-level="60" tabindex="0" title="Research and prototyping with PyTorch.">
+            <span class="skill-name">PyTorch</span>
             <div class="bar"><span class="fill"></span></div>
           </div>
-          <div class="skill" data-level="70" tabindex="0" title="Containerized applications using Docker and composed services.">
-            <span class="skill-name">Docker</span>
+          <div class="skill" data-level="70" tabindex="0" title="Interactive exploration and documentation using notebooks.">
+            <span class="skill-name">Jupyter</span>
             <div class="bar"><span class="fill"></span></div>
           </div>
-          <div class="skill" data-level="90" tabindex="0" title="Version control for all projects with Git." >
+          <!-- Databases -->
+          <div class="skill" data-level="80" tabindex="0" title="Relational modelling and queries with PostgreSQL.">
+            <span class="skill-name">PostgreSQL</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="75" tabindex="0" title="Transaction‑safe CRUD operations on MySQL.">
+            <span class="skill-name">MySQL</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="65" tabindex="0" title="Document databases for flexible schemas.">
+            <span class="skill-name">MongoDB</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="70" tabindex="0" title="Lightweight databases for local development and testing.">
+            <span class="skill-name">SQLite</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <!-- DevOps -->
+          <div class="skill" data-level="85" tabindex="0" title="Distributed version control for all projects.">
             <span class="skill-name">Git</span>
             <div class="bar"><span class="fill"></span></div>
           </div>
-          <div class="skill" data-level="65" tabindex="0" title="Automated end‑to‑end tests using Playwright.">
-            <span class="skill-name">Playwright</span>
+          <div class="skill" data-level="70" tabindex="0" title="CI/CD pipelines and automated workflows.">
+            <span class="skill-name">GitHub Actions</span>
             <div class="bar"><span class="fill"></span></div>
           </div>
-          <div class="skill" data-level="65" tabindex="0" title="Browser automation and UI tests with Selenium.">
-            <span class="skill-name">Selenium</span>
+          <div class="skill" data-level="80" tabindex="0" title="Containerised applications and orchestration.">
+            <span class="skill-name">Docker</span>
             <div class="bar"><span class="fill"></span></div>
           </div>
-          <div class="skill" data-level="75" tabindex="0" title="Delivered enterprise solutions with Mendix low‑code platform.">
-            <span class="skill-name">Mendix</span>
+          <div class="skill" data-level="75" tabindex="0" title="Daily development and system administration on Linux.">
+            <span class="skill-name">Linux</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="65" tabindex="0" title="Automation and scripting with shell commands.">
+            <span class="skill-name">Bash</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <!-- APIs & Systems -->
+          <div class="skill" data-level="85" tabindex="0" title="Designing and consuming RESTful APIs.">
+            <span class="skill-name">REST</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="60" tabindex="0" title="Graph‑structured queries using GraphQL.">
+            <span class="skill-name">GraphQL</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="70" tabindex="0" title="Real‑time communication over WebSockets.">
+            <span class="skill-name">WebSockets</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="75" tabindex="0" title="Network programming using TCP/UDP sockets.">
+            <span class="skill-name">Socket Programming</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <!-- Cloud -->
+          <div class="skill" data-level="70" tabindex="0" title="Foundational services on AWS.">
+            <span class="skill-name">AWS</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="65" tabindex="0" title="Deploying and scaling on Azure.">
+            <span class="skill-name">Azure</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="60" tabindex="0" title="Exploring Google Cloud fundamentals.">
+            <span class="skill-name">Google Cloud</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <!-- Security & Networking -->
+          <div class="skill" data-level="65" tabindex="0" title="Understanding TLS/PKI basics for secure communications.">
+            <span class="skill-name">TLS/PKI basics</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="60" tabindex="0" title="Configuring firewall rules and network policies.">
+            <span class="skill-name">Firewalls</span>
+            <div class="bar"><span class="fill"></span></div>
+          </div>
+          <div class="skill" data-level="70" tabindex="0" title="Fundamentals of TCP/IP networking.">
+            <span class="skill-name">TCP/IP fundamentals</span>
             <div class="bar"><span class="fill"></span></div>
           </div>
         </div>
@@ -307,10 +366,20 @@
     <section id="testimonials" class="section" aria-labelledby="testimonials-title">
       <div class="container">
         <h2 id="testimonials-title">Testimonials</h2>
-        <div class="testimonials-slider" aria-label="Testimonials slider">
-          <div class="testimonial">“Amer consistently delivers maintainable, robust solutions.”<span class="cite">— Colleague at S4 Digital</span></div>
-          <div class="testimonial">“His knowledge of full‑stack tools and libraries is impressive.”<span class="cite">— Professor, University of Windsor</span></div>
-          <div class="testimonial">“A creative problem‑solver who embraces challenges with enthusiasm.”<span class="cite">— Peer Developer</span></div>
+        <!-- Testimonials are presented as cards. On wider screens they appear in two columns; on smaller screens they stack. -->
+        <div class="testimonials-grid" aria-label="Testimonials">
+          <div class="testimonial-card">
+            <p class="quote">“Amer is a leader hidden in the bushes. We teamed up in a Scaled Agile Framework aiming to deliver an ambitious product involving cutting edge technology for a major Belgium Telco Company. While Amer remains discrete in larger forums and raises his voice only on purpose, his dedication has been key in a pair programming approach to deliver quality upon changing scope and requirements. He has demonstrated high standards not only in the low coding arena but also in his professional and trustworthy attitude: speak up early when an issue is identified, active contributor and takes initiative for problem solving, clear communication to bridge language gaps between technical and leadership people. All that with keeping his cool and a natural positive mind. Being such a great addition to a team together with his self-driven personal growth journey, Amer will surely bring him soon to higher callings.”</p>
+            <p class="author">Stéphane Moizan</p>
+            <p class="title">Founder &amp; Principal Consultant</p>
+            <p class="linkedin"><a href="https://www.linkedin.com/in/stephanemoizan" target="_blank" rel="noopener">LinkedIn</a></p>
+          </div>
+          <div class="testimonial-card">
+            <p class="quote">“Amer is team-oriented, goal-driven, and autonomous. He consistently demonstrated his ability to work collaboratively with other team members and stakeholders to deliver high-quality software solutions. His technical expertise and problem-solving skills were invaluable in helping us overcome complex challenges.”</p>
+            <p class="author">Brian Rollier</p>
+            <p class="title">Telecom, Digital &amp; Real Estate Professional</p>
+            <p class="linkedin"><a href="https://www.linkedin.com/in/brian-rollier" target="_blank" rel="noopener">LinkedIn</a></p>
+          </div>
         </div>
       </div>
     </section>

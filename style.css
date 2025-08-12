@@ -562,25 +562,35 @@ h2::after {
 }
 
 /* Testimonials */
-.testimonials-slider {
-  position: relative;
-  overflow: hidden;
-  padding: 1rem 0;
+/* Testimonials grid: displays testimonials in responsive cards. On desktops
+   cards appear side‑by‑side; on small screens they stack. */
+.testimonials-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
-.testimonial {
+.testimonial-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+.testimonial-card .quote {
   font-style: italic;
-  margin-bottom: 1.5rem;
-  opacity: 0;
-  transition: opacity 0.5s ease;
+  margin-bottom: 1rem;
 }
-.testimonial.active {
-  opacity: 1;
+.testimonial-card .author {
+  font-weight: bold;
 }
-.testimonial .cite {
-  display: block;
-  margin-top: 0.5rem;
+.testimonial-card .title {
   font-size: 0.9rem;
   color: var(--muted-text);
+  margin-bottom: 0.5rem;
+}
+.testimonial-card a {
+  color: var(--accent-color);
+  text-decoration: underline;
 }
 
 /* Résumé */
