@@ -349,20 +349,24 @@ document.addEventListener('DOMContentLoaded', () => {
       // ensure that thumbnails render correctly without relying on cross‑domain
       // metadata. Should the `img` property be absent, fall back to the preview
       // service.
+      // Define the two manual external projects.  Use the optimized JPEG
+      // versions of the thumbnails rather than the large PNG originals.
+      // These smaller images load more reliably on GitHub Pages and help
+      // avoid 403 errors when files exceed certain thresholds.
       const externals = [
         {
           title: 'Remire.co',
           desc: 'Global hiring platform—contributed to core feature development and integrations.',
           url: 'https://remire.co/',
           linkText: 'Learn More',
-          img: 'images/remire.png'
+          img: 'images/remire.jpg'
         },
         {
           title: 'Proximus+ (Belgium Telco)',
           desc: 'Wallet modules, NBA/NBO cards, personalization; worked within SAFe.',
           url: 'https://play.google.com/store/apps/details?id=be.belgacom.hello',
           linkText: 'Learn More',
-          img: 'images/proximus.png'
+          img: 'images/proximus.jpg'
         }
       ];
       for (const ext of externals) {
