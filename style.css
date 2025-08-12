@@ -570,21 +570,27 @@ h2::after {
   margin-top: 2rem;
 }
 .testimonial-track {
+  /* Display testimonials in a horizontal row and smoothly animate between
+     them. Without an explicit width, flex items can shrink, causing
+     subsequent slides to be clipped. */
   display: flex;
   transition: transform 0.6s ease;
 }
-    .testimonial {
-      flex: 0 0 100%;
-      max-width: 100%;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      padding: 1.5rem;
-      box-shadow: var(--shadow);
-      /* Remove horizontal margin to ensure slide fits within container without
-         overflowing. Extra spacing can be handled via padding instead. */
-      margin: 0;
-    }
+
+/* Each testimonial should occupy the full width of the slider container and
+   must not shrink when the flex container calculates widths. Using
+   `min-width: 100%` ensures the element will not be smaller than the
+   container, and `flex: none` prevents automatic shrinking or growing. */
+.testimonial {
+  flex: none;
+  min-width: 100%;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  margin: 0;
+}
 .testimonial .quote {
   font-style: italic;
   margin-bottom: 1rem;
